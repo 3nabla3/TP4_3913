@@ -50,7 +50,7 @@ public class MainWindowTest {
         assertThrows(IllegalArgumentException.class, () -> {
             // Non-existent currency
             MainWindow.convert(usd.getName(), "N'importe quoi", currencies, 100.0);
-            MainWindow.convert("N'importe quoi", eur.getName() , currencies, 100.0);
+            MainWindow.convert("N'importe quoi", eur.getName(), currencies, 100.0);
         });
     }
 
@@ -69,5 +69,36 @@ public class MainWindowTest {
 
         double value = MainWindow.convert(currency1, currency2, currencies, 100.0);
         assertEquals(100.0, value);
+    }
+
+    /**
+     * Test the conversion with an empty list of currencies.
+     * This should return 0.0
+     * white box test
+     */
+    @Test
+    public void testCurrenciesEmpty() {
+        ArrayList<Currency> currencies = new ArrayList<>();
+        String currency1 = "Euro";
+        String currency2 = "US Dollar";
+
+        double value = MainWindow.convert(currency1, currency2, currencies, 100.0);
+        assertEquals(0.0, value);
+    }
+
+    /**
+     * Test the conversion with null value for currencies
+     * This should return 0.0
+     * white box test
+     */
+    @Test
+    public void testCurrency1Null() {
+        ArrayList<Currency> currencies = Currency.init();
+
+        double value = MainWindow.convert(null, "US Dollar", currencies, 100.0);
+        assertEquals(0.0, value);
+
+        value = MainWindow.convert(null, "Euro", currencies, 100.0);
+        assertEquals(0.0, value);
     }
 }
