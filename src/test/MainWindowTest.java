@@ -41,4 +41,21 @@ public class MainWindowTest {
             MainWindow.convert("N'importe quoi", eur.getName() , currencies, 100.0);
         });
     }
+
+    /**
+     * Test the conversion with a non-static currency name.
+     * There is a bug in the code where the currency name is compared
+     * with a double equals (==) instead of a .equals() method.
+     * This test is here to show that the bug is still present.
+     * white box test
+     */
+    @Test
+    public void testCompareBug() {
+        ArrayList<Currency> currencies = Currency.init();
+        String currencyName = "US";
+        currencyName += "D";
+
+        double value = MainWindow.convert(currencyName, "USD", currencies, 100.0);
+        assertEquals(100.0, value);
+    }
 }
