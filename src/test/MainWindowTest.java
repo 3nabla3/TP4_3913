@@ -10,6 +10,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MainWindowTest {
+    /**
+     * Test if converting a currency to the same currency always returns
+     * the same amount chosen.
+     */
     @Test
     public void testConvert() {
         ArrayList<Currency> currencies = Currency.init();
@@ -19,6 +23,12 @@ public class MainWindowTest {
         }
     }
 
+    /**
+     * Testing for non-valid arguments:
+     * - Negative amount
+     * - Amount greater than 1 000 000 (maximum is 1 000 000)
+     * - Non-existant currencies for currency1 and currency2
+     */
     @Test
     public void testIllegalArgs() {
         ArrayList<Currency> currencies = Currency.init();
