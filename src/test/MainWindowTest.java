@@ -5,9 +5,9 @@ import currencyConverter.MainWindow;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MainWindowTest {
     /**
@@ -22,6 +22,31 @@ public class MainWindowTest {
             Double value = MainWindow.convert(currency.getName(), currency.getName(), currencies, 1.0);
             assertEquals(value, 1.0);
         }
+    }
+
+    /**
+     * Test that all currencies in the specifications are implemented.
+     * black box test
+     */
+    @Test
+    public void testAllCurrencies() {
+        ArrayList<String> validCurrencies =
+                new ArrayList<>(Arrays.asList("USD", "CAD", "GBP", "EUR", "CHF", "AUD"));
+
+        ArrayList<Currency> currencies = Currency.init();
+
+        for (String shortName : validCurrencies) {
+            String longName = null;
+            for (Currency currency : currencies) {
+                if (currency.getShortName().equals(shortName)) {
+                    longName = currency.getName();
+                }
+            }
+            assertNotNull(longName);
+            Double value = MainWindow.convert(longName, longName, currencies, 1.0);
+            assertEquals(1.0, value);
+        }
+
     }
 
     /**
