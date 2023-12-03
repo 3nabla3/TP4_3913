@@ -13,6 +13,7 @@ public class MainWindowTest {
     /**
      * Test if converting a currency to the same currency always returns
      * the same amount chosen.
+     * black box test
      */
     @Test
     public void testConvert() {
@@ -28,6 +29,7 @@ public class MainWindowTest {
      * - Negative amount
      * - Amount greater than 1 000 000 (maximum is 1 000 000)
      * - Non-existant currencies for currency1 and currency2
+     * black box test
      */
     @Test
     public void testIllegalArgs() {
