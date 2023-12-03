@@ -20,6 +20,11 @@ public class CurrencyTest {
         for (double value = 1.0; value < 10; value += 1.0) {
             assertEquals(value, Currency.convert(value, rate));
         }
+
+        // nombre de décimals
+        double amount = 1.555d;
+        rate = 1.0;
+        assertEquals(1.56, Currency.convert(amount, rate));
     }
 
     /**
