@@ -62,7 +62,7 @@ public class MainWindowTest {
      * white box test
      */
     @Test
-    public void testCompareBug() {
+    public void testStringCompareBug() {
         ArrayList<Currency> currencies = Currency.init();
         String currency1 = new String("Euro");  // force a new memory allocation
         String currency2 = new String("Euro");
@@ -92,13 +92,13 @@ public class MainWindowTest {
      * white box test
      */
     @Test
-    public void testCurrency1Null() {
+    public void testCurrencyArgNull() {
         ArrayList<Currency> currencies = Currency.init();
 
         double value = MainWindow.convert(null, "US Dollar", currencies, 100.0);
         assertEquals(0.0, value);
 
-        value = MainWindow.convert(null, "Euro", currencies, 100.0);
+        value = MainWindow.convert("US Dollar", null, currencies, 100.0);
         assertEquals(0.0, value);
     }
 }
