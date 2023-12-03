@@ -22,19 +22,22 @@ public class MainWindowTest {
     @Test
     public void testIllegalArgs(){
         ArrayList<Currency> currencies = Currency.init();
-        Random random = new Random();
-        Currency currencyOne = currencies.get(random.nextInt(6));
-        Currency currencyTwo = currencies.get(random.nextInt(6));
+        Currency usd = currencies.get(0);
+        Currency eur = currencies.get(1);
+
         assertThrows(IllegalArgumentException.class, () -> {
             // Negative amount
-            MainWindow.convert(currencyOne.getName(), currencyTwo.getName(), currencies, -100.0);
+            MainWindow.convert(usd.getName(), eur.getName(), currencies, -100.0);
+        });
+
+        assertThrows(IllegalArgumentException.class, () -> {
             // Out of bounds amount (from specifications [0, 1 000 000] )
-            MainWindow.convert(currencyOne.getName(), currencyTwo.getName(), currencies, 1000001.0);
+            MainWindow.convert(usd.getName(), eur.getName(), currencies, 1_000_001.0);
+        });
+
+        assertThrows(IllegalArgumentException.class, () -> {
             // Non-existent currency
-            MainWindow.convert(currencyOne.getName(), "N'importe quoi", currencies, 100.0);
+            MainWindow.convert(usd.getName(), "N'importe quoi", currencies, 100.0);
         });
     }
-
-
-
 }
