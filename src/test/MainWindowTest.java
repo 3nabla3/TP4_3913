@@ -64,10 +64,10 @@ public class MainWindowTest {
     @Test
     public void testCompareBug() {
         ArrayList<Currency> currencies = Currency.init();
-        String currencyName = "US";
-        currencyName += "D";
+        String currency1 = new String("Euro");  // force a new memory allocation
+        String currency2 = new String("Euro");
 
-        double value = MainWindow.convert(currencyName, "USD", currencies, 100.0);
+        double value = MainWindow.convert(currency1, currency2, currencies, 100.0);
         assertEquals(100.0, value);
     }
 }
