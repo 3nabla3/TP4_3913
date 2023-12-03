@@ -100,5 +100,8 @@ public class MainWindowTest {
 
         value = MainWindow.convert("US Dollar", null, currencies, 100.0);
         assertEquals(0.0, value);
+
+        value = MainWindow.convert(null, null, currencies, 100.0);
+        assertEquals(0.0, value);
     }
 }
