@@ -5,9 +5,9 @@ import currencyConverter.MainWindow;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MainWindowTest {
     @Test
@@ -20,7 +20,7 @@ public class MainWindowTest {
     }
 
     @Test
-    public void testIllegalArgs(){
+    public void testIllegalArgs() {
         ArrayList<Currency> currencies = Currency.init();
         Currency usd = currencies.get(0);
         Currency eur = currencies.get(1);
