@@ -74,8 +74,12 @@ public class MainWindowTest {
 
         assertThrows(IllegalArgumentException.class, () -> {
             // Non-existent currency
-            MainWindow.convert(usd.getName(), "N'importe quoi", currencies, 100.0);
-            MainWindow.convert("N'importe quoi", eur.getName(), currencies, 100.0);
+            MainWindow.convert("Does not exist", eur.getName(), currencies, 100.0);
+        });
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            // Non-existent currency
+            MainWindow.convert(usd.getName(), "Does not exist", currencies, 100.0);
         });
     }
 
