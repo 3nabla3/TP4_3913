@@ -41,6 +41,27 @@ public class MainWindowTest {
     }
 
     /**
+     * Test that all conversions return a positive Double value.
+     * black box test
+     */
+    @Test
+    public void testValueValidity() {
+        ArrayList<String> validCurrencies =
+                new ArrayList<>(Arrays.asList("USD", "CAD", "GBP", "EUR", "CHF", "AUD"));
+        ArrayList<Currency> currencies = Currency.init();
+
+        for (String curr1 : validCurrencies) {
+            String longName1 = convertShortNameToLongName(curr1, currencies);
+            for (String curr2 : validCurrencies) {
+                String longName2 = convertShortNameToLongName(curr2, currencies);
+                Double value = MainWindow.convert(longName1, longName2, currencies, 100.0);
+                assertTrue(value > 0d);
+            }
+        }
+    }
+
+
+    /**
      * Test that all currencies in the specifications are implemented.
      * black box test
      */
