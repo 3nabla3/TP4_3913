@@ -13,7 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MainWindowTest {
     /**
      * Helper function to convert a short name to a long name
-     * @param shortName the short name of the currency (ex: USD)
+     *
+     * @param shortName  the short name of the currency (ex: USD)
      * @param currencies the list of currencies to search in
      * @return the long name of the currency (ex: US Dollar)
      */
@@ -59,7 +60,6 @@ public class MainWindowTest {
             }
         }
     }
-
 
     /**
      * Test that all currencies in the specifications are implemented.
