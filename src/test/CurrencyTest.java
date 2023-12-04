@@ -18,7 +18,8 @@ public class CurrencyTest {
     public void testRate1() {
         double rate = 1.0;
         for (double value = 1.0; value < 10; value += 1.0) {
-            assertEquals(value, Currency.convert(value, rate));
+            Double convertedValue = Currency.convert(value, rate);
+            assertEquals(value, convertedValue);
         }
     }
 
@@ -31,7 +32,8 @@ public class CurrencyTest {
     public void testRate0() {
         double rate = 0.0;
         for (double value = 0.0; value < 10; value += 1.0) {
-            assertEquals(0.0, Currency.convert(value, rate));
+            Double convertedValue = Currency.convert(value, rate);
+            assertEquals(0.0, convertedValue);
         }
     }
 
@@ -44,7 +46,8 @@ public class CurrencyTest {
     public void testNegativeValue() {
         double rate = 1.5;
         double value = -1.0;
-        assertEquals(-1.5, Currency.convert(value, rate));
+        Double convertedValue = Currency.convert(value, rate);
+        assertEquals(-1.5, convertedValue);
     }
 
     /**
@@ -56,7 +59,8 @@ public class CurrencyTest {
     public void testNegativeRate() {
         double rate = -1.5;
         double value = 1.0;
-        assertEquals(-1.5, Currency.convert(value, rate));
+        Double convertedValue = Currency.convert(value, rate);
+        assertEquals(-1.5, convertedValue);
     }
 
     /**
@@ -68,7 +72,8 @@ public class CurrencyTest {
     public void testConvertWithRounding() {
         Double amount = 123.456789;
         Double exchangeValue = 1.23456789;
-        assertEquals(152.42, Currency.convert(amount, exchangeValue));
+        Double convertedValue = Currency.convert(amount, exchangeValue);
+        assertEquals(152.42, convertedValue);
     }
 
     /**

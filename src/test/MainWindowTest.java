@@ -20,7 +20,7 @@ public class MainWindowTest {
         ArrayList<Currency> currencies = Currency.init();
         for (Currency currency : currencies) {
             Double value = MainWindow.convert(currency.getName(), currency.getName(), currencies, 1.0);
-            assertEquals(value, 1.0);
+            assertEquals(1.0, value);
         }
     }
 
