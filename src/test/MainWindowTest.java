@@ -11,6 +11,12 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MainWindowTest {
+    /**
+     * Helper function to convert a short name to a long name
+     * @param shortName the short name of the currency (ex: USD)
+     * @param currencies the list of currencies to search in
+     * @return the long name of the currency (ex: US Dollar)
+     */
     private String convertShortNameToLongName(String shortName, ArrayList<Currency> currencies) {
         for (Currency currency : currencies) {
             if (currency.getShortName().equals(shortName)) {
@@ -19,6 +25,7 @@ public class MainWindowTest {
         }
         return null;
     }
+
     /**
      * Test if converting a currency to the same currency always returns
      * the same amount chosen.
@@ -45,17 +52,11 @@ public class MainWindowTest {
         ArrayList<Currency> currencies = Currency.init();
 
         for (String shortName : validCurrencies) {
-            String longName = null;
-            for (Currency currency : currencies) {
-                if (currency.getShortName().equals(shortName)) {
-                    longName = currency.getName();
-                }
-            }
+            String longName = convertShortNameToLongName(shortName, currencies);
             assertNotNull(longName);
             Double value = MainWindow.convert(longName, longName, currencies, 1.0);
             assertEquals(1.0, value);
         }
-
     }
 
     /**
@@ -102,8 +103,8 @@ public class MainWindowTest {
     @Test
     public void testStringCompareBug() {
         ArrayList<Currency> currencies = Currency.init();
-        String currency1 = new String("Euro");  // force a new memory allocation
-        String currency2 = new String("Euro");
+        String currency1 = "Euro";  // force a new memory allocation
+        String currency2 = "Euro";
 
         double value = MainWindow.convert(currency1, currency2, currencies, 100.0);
         assertEquals(100.0, value);

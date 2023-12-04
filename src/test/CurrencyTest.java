@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class CurrencyTest {
-
     /**
      * Test the conversion of a value with a rate of 1.0
      * This should not change the value
