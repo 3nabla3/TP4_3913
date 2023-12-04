@@ -4,12 +4,21 @@ import currencyConverter.Currency;
 import currencyConverter.MainWindow;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MainWindowTest {
+    private String convertShortNameToLongName(String shortName, ArrayList<Currency> currencies) {
+        for (Currency currency : currencies) {
+            if (currency.getShortName().equals(shortName)) {
+                return currency.getName();
+            }
+        }
+        return null;
+    }
     /**
      * Test if converting a currency to the same currency always returns
      * the same amount chosen.
