@@ -4,7 +4,7 @@ import currencyConverter.Currency;
 import currencyConverter.MainWindow;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -28,55 +28,26 @@ public class MainWindowTest {
     }
 
     /**
-     * Test if converting a currency to the same currency always returns
-     * the same amount chosen.
+     * Test that all currencies from the specifications are implemented,
+     * and that the conversion is valid. This means that if we convert
+     * from x to x, the value remain constant, and if we convert from x to y,
+     * the value should be a positive double.
      * black box test
      */
     @Test
-    public void testConvert() {
-        ArrayList<Currency> currencies = Currency.init();
-        for (Currency currency : currencies) {
-            Double value = MainWindow.convert(currency.getName(), currency.getName(), currencies, 1.0);
-            assertEquals(1.0, value);
-        }
-    }
-
-    /**
-     * Test that all conversions return a positive Double value.
-     * black box test
-     */
-    @Test
-    public void testValueValidity() {
-        ArrayList<String> validCurrencies =
-                new ArrayList<>(Arrays.asList("USD", "CAD", "GBP", "EUR", "CHF", "AUD"));
+    public void testCurrenciesInSpecs() {
+        ArrayList<String> currenciesFromSpecs = new ArrayList<>(Arrays.asList("USD", "CAD", "GBP", "EUR", "CHF", "AUD"));
         ArrayList<Currency> currencies = Currency.init();
 
-        for (String curr1 : validCurrencies) {
+        for (String curr1 : currenciesFromSpecs) {
             String longName1 = convertShortNameToLongName(curr1, currencies);
-            for (String curr2 : validCurrencies) {
+            for (String curr2 : currenciesFromSpecs) {
                 String longName2 = convertShortNameToLongName(curr2, currencies);
                 Double value = MainWindow.convert(longName1, longName2, currencies, 100.0);
-                assertTrue(value > 0d);
+
+                if (curr1.equals(curr2)) assertEquals(100.0, value);  // same currency, same value
+                else assertTrue(value > 0d);  // different currency, positive value
             }
-        }
-    }
-
-    /**
-     * Test that all currencies in the specifications are implemented.
-     * black box test
-     */
-    @Test
-    public void testAllCurrencies() {
-        ArrayList<String> validCurrencies =
-                new ArrayList<>(Arrays.asList("USD", "CAD", "GBP", "EUR", "CHF", "AUD"));
-
-        ArrayList<Currency> currencies = Currency.init();
-
-        for (String shortName : validCurrencies) {
-            String longName = convertShortNameToLongName(shortName, currencies);
-            assertNotNull(longName);
-            Double value = MainWindow.convert(longName, longName, currencies, 1.0);
-            assertEquals(1.0, value);
         }
     }
 
