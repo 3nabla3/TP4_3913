@@ -4,7 +4,6 @@ import currencyConverter.Currency;
 import currencyConverter.MainWindow;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -100,6 +99,30 @@ public class MainWindowTest {
 
         double value = MainWindow.convert(currency1, currency2, currencies, 100.0);
         assertEquals(100.0, value);
+    }
+
+
+    /**
+     * Test the conversion with currencies at different locations
+     * in the array. This forces the program to test the most important
+     * paths in the code.
+     * white box test
+     */
+    @Test
+    public void testIChemins() {
+        ArrayList<Currency> currencies = Currency.init();
+        // test first, middle, and last currency
+        int[] indicesToTest = {0, currencies.size() / 2, currencies.size() - 1};
+
+        for (int i : indicesToTest) {
+            for (int j : indicesToTest) {
+                String currency1 = currencies.get(i).getName();
+                String currency2 = currencies.get(j).getName();
+
+                double value = MainWindow.convert(currency1, currency2, currencies, 100.0);
+                assertTrue(value > 0d);
+            }
+        }
     }
 
     /**
